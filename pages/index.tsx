@@ -1,12 +1,15 @@
-import type { NextPage } from "next";
 import Container from "../components/Container";
 import Image from "next/image";
 import PostList from "../components/PostList";
 import metadata from "../data/metadata";
 import { allPosts } from "contentlayer/generated";
 import { InferGetStaticPropsType } from "next";
+import { useContext } from "react";
+import { AppContext } from "context/WalletContext";
 
 const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { isConnected, walletAddress } = useContext(AppContext)
+  console.log(isConnected)
   return (
     <Container className={''}>
       <div className={` my-7 w-full`}>
@@ -27,6 +30,7 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
           </span>
         </div>
         <PostList posts={posts} />
+        { walletAddress }
       </div>
     </Container>
   );

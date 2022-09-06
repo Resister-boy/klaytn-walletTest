@@ -1,33 +1,20 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { WalletContext } from 'context/WalletContext'
-import { Window } from '../../interface/index'
+import React, { useContext } from 'react'
+import { AppContext } from '../../context/WalletContext'
 
 const WalletConnect = () => {
-  const { klaytn } = useContext(WalletContext)
-  // console.log('Before Coonnect', klaytn)
-  const [ isConnect, SetIsConnect ] = useState(klaytn)
-  
-  useEffect(() => {
+  const {isConnected, walletAddress, networkVersion, connectWallet } = useContext(AppContext);
+  console.log(isConnected, walletAddress, )
 
-  }, [isConnect])
-
-  const connectWallet= () => {
-    window.klaytn.enable()
-    SetIsConnect(window.klaytn.selectedAddress)
-    console.log(window.klaytn)
+  const ConnectWallet = async () => {
+    if (typeof window !== "undefined" && isConnected === false) {
+      connectWallet()
+    }
   }
 
   return (
     <div>
-      {isConnect}
-      {isConnect === undefined 
-      ? (
-        <h1>지갑이 연결되지 않았습니다 </h1>
-      )
-      : (
-        <h1>지갑이 연결되었습니다</h1>
-      )}
-      <button onClick={connectWallet}>버튼</button>
+      {walletAddress}
+      <button onClick={ConnectWallet}>클릭</button>
     </div>
   )
 }

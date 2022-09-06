@@ -1,8 +1,11 @@
 import { createContext } from "react";
-import { Window } from "interface";
+import { App } from "interface";
 
-export const contextDefaultValue: Window = {
-  klaytn: undefined
+export const contextDefaultValue: App = {
+  isConnected: false,
+  connectWallet: () => {},
+  walletAddress: undefined,
+  networkVersion: undefined,
 }
 
-export const WalletContext = createContext<Window>(contextDefaultValue);
+export const AppContext = createContext<App>(contextDefaultValue);
